@@ -1,6 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AppService } from './app.service';
+import { Controller, Get } from '@nestjs/common'
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
+import { AppService } from './app.service'
 
 @ApiTags('系统')
 @Controller()
@@ -10,7 +10,7 @@ export class AppController {
   @Get()
   @ApiOperation({ summary: '服务标识' })
   getHello(): string {
-    return this.appService.getHello();
+    return this.appService.getHello()
   }
 
   @Get('health')
@@ -19,6 +19,6 @@ export class AppController {
   })
   @ApiOkResponse({ schema: { example: { status: 'ok' } } })
   getHealth(): { status: string } {
-    return this.appService.getHealth();
+    return this.appService.getHealth()
   }
 }

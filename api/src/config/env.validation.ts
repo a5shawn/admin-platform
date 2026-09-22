@@ -1,4 +1,4 @@
-import { plainToInstance } from 'class-transformer';
+import { plainToInstance } from 'class-transformer'
 import {
   IsEnum,
   IsInt,
@@ -8,7 +8,7 @@ import {
   Max,
   Min,
   validateSync,
-} from 'class-validator';
+} from 'class-validator'
 
 export enum NodeEnv {
   Development = 'development',
@@ -22,25 +22,25 @@ export enum NodeEnv {
 export class EnvironmentVariables {
   @IsEnum(NodeEnv)
   @IsOptional()
-  NODE_ENV: NodeEnv = NodeEnv.Development;
+  NODE_ENV: NodeEnv = NodeEnv.Development
 
   @IsInt()
   @Min(1)
   @Max(65535)
   @IsOptional()
-  PORT: number = 3000;
+  PORT: number = 3000
 
   @IsString({ message: 'DATABASE_URL 必须是字符串' })
   @IsNotEmpty({ message: 'DATABASE_URL 不能为空（参考 .env.example）' })
-  DATABASE_URL: string;
+  DATABASE_URL: string
 
   @IsString({ message: 'JWT_SECRET 必须是字符串' })
   @IsNotEmpty({ message: 'JWT_SECRET 不能为空（参考 .env.example）' })
-  JWT_SECRET: string;
+  JWT_SECRET: string
 
   @IsString()
   @IsOptional()
-  REDIS_URL: string = 'redis://localhost:6379';
+  REDIS_URL: string = 'redis://localhost:6379'
 }
 
 export function validateEnv(
@@ -48,9 +48,9 @@ export function validateEnv(
 ): Record<string, unknown> {
   const validated = plainToInstance(EnvironmentVariables, config, {
     enableImplicitConversion: true,
-  });
+  })
 
-  const errors = validateSync(validated, { skipMissingProperties: false });
+  const errors = validateSync(validated, { skipMissingProperties: false })
 
   if (errors.length > 0) {
     const details = errors
@@ -58,10 +58,10 @@ export function validateEnv(
         (error) =>
           `  - ${error.property}: ${Object.values(error.constraints ?? {}).join('；')}`,
       )
-      .join('\n');
-    throw new Error(`环境变量校验失败，服务启动终止：\n${details}`);
+      .join('\n')
+    throw new Error(`环境变量校验失败，服务启动终止：\n${details}`)
   }
 
   // 合并回原始 config，避免未声明的变量（如 PATH）在 ConfigService 中丢失。
-  return { ...config, ...validated };
+  return { ...config, ...validated }
 }

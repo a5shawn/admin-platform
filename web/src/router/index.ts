@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import { createRouter, createWebHistory } from 'vue-router'
 
 /**
  * 静态路由。

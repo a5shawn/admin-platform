@@ -32,11 +32,11 @@ export class EnvironmentVariables {
 
   @IsString({ message: 'DATABASE_URL 必须是字符串' })
   @IsNotEmpty({ message: 'DATABASE_URL 不能为空（参考 .env.example）' })
-  DATABASE_URL: string
+  DATABASE_URL!: string
 
   @IsString({ message: 'JWT_SECRET 必须是字符串' })
   @IsNotEmpty({ message: 'JWT_SECRET 不能为空（参考 .env.example）' })
-  JWT_SECRET: string
+  JWT_SECRET!: string
 
   @IsString()
   @IsOptional()

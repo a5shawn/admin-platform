@@ -48,10 +48,14 @@ onMounted(probeHealth)
     <el-col :span="12">
       <el-card shadow="never" header="技术栈">
         <el-descriptions :column="1" size="small" border>
-          <el-descriptions-item label="前端">Vue 3.5 + Vite 7 + Pinia 3 + Vue Router 4</el-descriptions-item>
+          <el-descriptions-item label="前端"
+            >Vue 3.5 + Vite 7 + Pinia 3 + Vue Router 4</el-descriptions-item
+          >
           <el-descriptions-item label="UI">Element Plus 2.14</el-descriptions-item>
           <el-descriptions-item label="后端">NestJS 11（CommonJS）+ Prisma 7</el-descriptions-item>
-          <el-descriptions-item label="依赖服务">PostgreSQL 16 (pgvector) + Redis 7</el-descriptions-item>
+          <el-descriptions-item label="依赖服务"
+            >PostgreSQL 16 (pgvector) + Redis 7</el-descriptions-item
+          >
         </el-descriptions>
       </el-card>
     </el-col>

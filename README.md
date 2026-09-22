@@ -13,7 +13,7 @@ hr-agent、ai-workspace）的认证、权限、审计、文件、SSE 与部署�
 | 前端 | Vue 3.5、TypeScript 5.9、Vite 7、Pinia 3、Vue Router 4、Element Plus 2.14、axios |
 | 后端 | NestJS 11（**CommonJS**）、TypeScript 5.9、Prisma 7、Express 5 |
 | 数据 | PostgreSQL 16（pgvector 0.8.6）、Redis 7 |
-| 质量 | ESLint 9 + Prettier 3（api）／ESLint 10 + oxlint（web）；Jest 30（api）、vitest（web） |
+| 质量 | ESLint 9 + Prettier 3（两端一致，不用 oxlint）；Jest 30（api 单测与 e2e）、vitest（web 单测） |
 | 交付 | Docker、Docker Compose |
 | 运行基线 | Node.js 24 LTS、pnpm 11.24.0（`.nvmrc` + `packageManager` 固定） |
 

@@ -14,7 +14,7 @@ admin-platform 的前端（Vue 3 + TypeScript + Vite）。
 | UI | Element Plus 2.14 |
 | 请求 | axios 1.x（统一实例见 `src/common/http/request.ts`） |
 | 测试 | vitest 4（`*.spec.ts`） |
-| 静态检查 | ESLint 10 + eslint-plugin-vue + oxlint + Prettier 3 |
+| 静态检查 | ESLint 9 + eslint-plugin-vue + Prettier 3（不用 oxlint） |
 
 > `web` 使用 ESM（Vite 约定），与 `api` 的 CommonJS 无关；两者互不影响。
 
@@ -25,9 +25,9 @@ pnpm install     # 安装依赖
 pnpm dev         # 开发服务器 http://localhost:5173
 pnpm build       # 类型检查 + 生产构建
 pnpm type-check  # 仅类型检查（vue-tsc）
-pnpm lint        # oxlint + eslint（均带 --fix）
+pnpm lint        # eslint --fix + prettier --write（见下）
 pnpm test:unit   # vitest
-pnpm format      # prettier
+pnpm format      # prettier --write src/
 ```
 
 ## 目录约定

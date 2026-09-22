@@ -2,7 +2,6 @@ import { globalIgnores } from 'eslint/config'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import pluginVue from 'eslint-plugin-vue'
 import pluginVitest from '@vitest/eslint-plugin'
-import pluginOxlint from 'eslint-plugin-oxlint'
 import skipFormatting from 'eslint-config-prettier/flat'
 
 // To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
@@ -26,7 +25,7 @@ export default defineConfigWithVueTs(
     files: ['src/**/__tests__/*'],
   },
 
-  ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
-
+  // Prettier 作为独立工具承担格式化，这里只关闭与之冲突的 ESLint 规则；
+  // 格式化由 `pnpm lint:format` / `pnpm format` 执行。
   skipFormatting,
 )

@@ -1,0 +1,9 @@
+# pnpm 11 默认阻止依赖执行安装脚本，这里逐包显式声明放行 / 拒绝。
+# 本文件不含 packages 字段，因此不会把工程变成 pnpm workspace。
+allowBuilds:
+  # Jest 文件监听（jest-haste-map）依赖的原生 watcher，watch 模式需要
+  '@parcel/watcher': true
+  # Jest 原生模块解析器（jest-resolve）
+  unrs-resolver: true
+  # swagger-ui-dist 带进来的安装期统计上报，明确拒绝
+  '@scarf/scarf': false

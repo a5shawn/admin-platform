@@ -1,0 +1,29 @@
+# 依赖
+node_modules/
+
+# 构建产物
+dist/
+coverage/
+*.tsbuildinfo
+
+# 环境变量（.env.example 需提交）
+.env
+.env.local
+.env.*.local
+
+# 日志
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Prisma 生成物（M4）
+api/src/generated/
+
+# 本地上传文件（M10）
+api/uploads/
+
+# 编辑器与系统
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json

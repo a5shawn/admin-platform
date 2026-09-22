@@ -1,0 +1,7 @@
+# pnpm 11 默认阻止依赖执行安装脚本，这里逐包显式声明放行 / 拒绝。
+# 本文件不含 packages 字段，因此不会把工程变成 pnpm workspace。
+allowBuilds:
+  # Vite 的打包器，postinstall 负责落地平台原生二进制，必须放行
+  esbuild: true
+  # 文件监听原生模块（vitest / vite 监听用）
+  '@parcel/watcher': true

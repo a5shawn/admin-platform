@@ -13,7 +13,7 @@ hr-agent、ai-workspace）的认证、权限、审计、文件、SSE 与部署�
 | 前端 | Vue 3.5、TypeScript 5.9、Vite 7、Pinia 3、Vue Router 4、Element Plus 2.14、axios |
 | 后端 | NestJS 11（**CommonJS**）、TypeScript 5.9、Prisma 7、Express 5 |
 | 数据 | PostgreSQL 16（pgvector 0.8.6）、Redis 7 |
-| 质量 | ESLint 9 + Prettier 3（两端一致，不用 oxlint）；Jest 30（api 单测与 e2e）、vitest（web 单测） |
+| 质量 | ESLint 9 + Prettier 3（两端一致，不用 oxlint）；验证靠 Swagger + `curl` + 构建（**本项目不写测试**，见下） |
 | 交付 | Docker、Docker Compose |
 | 运行基线 | Node.js 24 LTS、pnpm 11.24.0（`.nvmrc` + `packageManager` 固定） |
 
@@ -36,8 +36,7 @@ admin-platform/                 # 独立 Git 仓库，clone 即可构建、部�
 │   │   ├── common/             # 统一响应、异常过滤器、守卫、拦截器
 │   │   ├── config/             # 环境变量契约与启动期校验
 │   │   └── app.module.ts
-│   ├── prisma/                 # schema 与迁移（M4）
-│   └── test/                   # e2e
+│   └── prisma/                 # schema 与迁移（M4）
 ├── docker-compose.yml          # postgres + redis（web/api 由 M15 加入）
 ├── .env.example                # compose 使用的环境变量样例
 └── .nvmrc
@@ -83,9 +82,10 @@ pnpm install          # 安装依赖
 pnpm dev              # 开发模式
 pnpm build            # 构建
 pnpm lint             # 静态检查
-pnpm test             # 单元测试（api 为 Jest；web 为 pnpm test:unit）
-pnpm test:e2e         # e2e（仅 api）
 ```
+
+> **本项目不写测试代码**（2026-09 决定，M14「测试补齐」跳过）。接口改动靠 Swagger 自测，
+> 服务端行为靠 `pnpm build` 后 `node dist/main` + `curl` 观察响应体与日志。
 
 ## 约定
 
@@ -94,6 +94,10 @@ pnpm test:e2e         # e2e（仅 api）
 - **模块形态**：`api` 使用 CommonJS（`package.json` 不写 `"type": "module"`，相对导入不带 `.js`
   后缀）；`web` 使用 ESM（Vite 约定）。该字段同时决定 `nest g` 生成的导入风格。
 - **环境变量**：`api` 缺少 `DATABASE_URL` / `JWT_SECRET` 时**启动即失败**。
+- **参数校验**：全局 `ValidationPipe` 为**严格口径**（`whitelist` + `forbidNonWhitelisted` +
+  `transform`）。多传字段（含未知查询参数）返回 400，校验失败的响应体为
+  `{ statusCode, message, errors: { 字段: [消息] } }`。入参 DTO 的每个字段都必须带校验装饰器，
+  否则会被 `whitelist` 剥离。
 - **响应格式**：M5 起统一为 `{ code, message, data }`。
 - **依赖构建审批**：pnpm 11 默认阻止依赖执行安装脚本，各工程的 `pnpm-workspace.yaml`
   用 `allowBuilds` 逐包声明（该文件不含 `packages` 字段，不构成 workspace）。
@@ -104,4 +108,5 @@ pnpm test:e2e         # e2e（仅 api）
 | --- | --- | --- |
 | M1 | 工程骨架与开发环境 | ✅ |
 | M2 | NestJS 核心机制：用户 CRUD（内存版） | ✅ |
-| M3–M15 | 见 `../admin-platform.md` | ⬜ |
+| M3 | 请求生命周期与数据校验 | ✅ |
+| M4–M15 | 见 `../admin-platform.md` | ⬜ |

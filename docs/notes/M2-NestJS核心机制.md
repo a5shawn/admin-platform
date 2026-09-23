@@ -1,7 +1,10 @@
 # M2 NestJS 核心机制：Module / Controller / Service / DI
 
+> ⚠️ **2026-09-23 更新**：本项目决定不再编写测试代码，M14「测试补齐」跳过。
+> 本文提到的 `provider-registration.spec.ts`、`user.service.spec.ts` 等断言文件
+> **已全部删除**——下文记录的结论仍然成立（当时均实测通过），但已不再有自动化断言保障。
+
 > 产出模块：`api/src/modules/user/`（6 个接口，内存版）+ `web/src/views/UserListView.vue`
-> 结论都落成了可执行断言，见 `provider-registration.spec.ts`
 
 ## 一、一个请求经过了哪些 Nest 构件
 

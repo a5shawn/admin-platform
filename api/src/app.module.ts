@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { validateEnv } from './config/env.validation'
+import { UserModule } from './modules/user/user.module'
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { validateEnv } from './config/env.validation'
       envFilePath: ['.env.local', '.env'],
       validate: validateEnv,
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

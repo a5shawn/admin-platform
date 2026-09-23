@@ -103,4 +103,5 @@ pnpm test:e2e         # e2e（仅 api）
 | 模块 | 内容 | 状态 |
 | --- | --- | --- |
 | M1 | 工程骨架与开发环境 | ✅ |
-| M2–M15 | 见 `../admin-platform.md` | ⬜ |
+| M2 | NestJS 核心机制：用户 CRUD（内存版） | ✅ |
+| M3–M15 | 见 `../admin-platform.md` | ⬜ |

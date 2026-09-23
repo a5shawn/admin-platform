@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { Odometer } from '@element-plus/icons-vue'
+import { Odometer, User } from '@element-plus/icons-vue'
 import { useAppStore } from '@/stores/app'
 
 /**
@@ -24,13 +24,17 @@ const pageTitle = computed(() => (route.meta.title as string | undefined) ?? '')
           <el-icon><Odometer /></el-icon>
           <span>概览</span>
         </el-menu-item>
+        <el-menu-item index="/users">
+          <el-icon><User /></el-icon>
+          <span>用户管理</span>
+        </el-menu-item>
       </el-menu>
     </el-aside>
 
     <el-container>
       <el-header class="layout__header">
         <span class="layout__title">{{ pageTitle }}</span>
-        <el-tag size="small" type="info">M1 工程骨架</el-tag>
+        <el-tag size="small" type="info">M2 用户 CRUD（内存版）</el-tag>
       </el-header>
 
       <el-main class="layout__main">

@@ -18,6 +18,12 @@ const router = createRouter({
           component: () => import('@/views/DashboardView.vue'),
           meta: { title: '概览' },
         },
+        {
+          path: 'users',
+          name: 'users',
+          component: () => import('@/views/UserListView.vue'),
+          meta: { title: '用户管理' },
+        },
       ],
     },
     {

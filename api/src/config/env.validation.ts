@@ -41,6 +41,13 @@ export class EnvironmentVariables {
   @IsString()
   @IsOptional()
   REDIS_URL: string = 'redis://localhost:6379'
+
+  /** 内存版用户仓储的种子条数（M2 用；M4 接 Prisma 后该变量失效） */
+  @IsInt()
+  @Min(0)
+  @Max(100)
+  @IsOptional()
+  USER_SEED_SIZE: number = 3
 }
 
 export function validateEnv(

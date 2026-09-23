@@ -41,4 +41,16 @@ pnpm test:e2e         # e2e 测试
 | --- | --- |
 | `/api/docs` | Swagger 文档 |
 | `/health` | 存活探针（M13 起细分 `/health` 与 `/ready`） |
+| `/users` | 用户列表（`keyword` 过滤）、创建 |
+| `/users/:id` | 详情、更新（`PATCH`）、删除（`DELETE`） |
+| `/users/:id/status` | 启用 / 禁用 |
 | `/sse/ping` | SSE 心跳（M12 提供） |
+
+## 模块说明
+
+`src/modules/user/` 是 M2 的产出：Controller 只做参数编排，业务规则在
+`UserService`（写）/ `UserQueryService`（读），数据访问经 `UserRepository` 令牌注入——
+M4 换成 Prisma 实现时 Service 不需要改动。Provider 的四种注册方式集中在
+`user.module.ts`，对应的断言见 `provider-registration.spec.ts`。
+
+> 当前是**内存版**：数据存在 Map 里，进程重启即清空（M4 接 PostgreSQL）。

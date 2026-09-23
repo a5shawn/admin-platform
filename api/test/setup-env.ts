@@ -4,3 +4,5 @@ process.env.NODE_ENV ??= 'test'
 process.env.DATABASE_URL ??=
   'postgresql://admin:admin123456@localhost:5432/admin_platform?schema=public'
 process.env.JWT_SECRET ??= 'e2e-test-secret'
+// 固定内存仓储的种子条数，让「useFactory 确实读到了配置」这条断言可复现
+process.env.USER_SEED_SIZE ??= '2'

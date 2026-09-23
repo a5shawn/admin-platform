@@ -9,6 +9,8 @@ async function bootstrap() {
   const configService = app.get(ConfigService)
 
   app.enableCors()
+  // 让 onApplicationShutdown 等钩子在收到 SIGTERM / SIGINT 时真正执行
+  app.enableShutdownHooks()
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('admin-platform API')
